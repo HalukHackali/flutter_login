@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login/view/kitaplar_sayfasi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class GirisSayfasi extends StatelessWidget {
-  GirisSayfasi({Key? key}) : super(key: key);
+class GirisSayfasi extends StatefulWidget {
+  const GirisSayfasi({Key? key}) : super(key: key);
 
+  @override
+  State<GirisSayfasi> createState() => _GirisSayfasiState();
+}
+
+class _GirisSayfasiState extends State<GirisSayfasi> {
   final TextEditingController _sifreController = TextEditingController();
+
+  String _mevcutSifre = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _sifreyiGetir();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +36,12 @@ class GirisSayfasi extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            "Hoşgeldiniz!\nBir Şifre Belirleyin",
+          Text(
+            _mevcutSifre.isNotEmpty
+                ? "Mevcut Şifrenizle\nGiriş Yapınız"
+                : "Hoşgeldiniz!\nBir Şifre Belirleyin",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 28),
+            style: const TextStyle(fontSize: 28),
           ),
           const SizedBox(height: 20),
           TextField(
@@ -39,20 +55,52 @@ class GirisSayfasi extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            child: const Text("Kaydet"),
-            onPressed: _sifreyiKaydet,
-          )
+            child: Text(_mevcutSifre.isNotEmpty ? "Giriş Yap" : "Kaydet"),
+            onPressed: (){
+              if(_mevcutSifre.isNotEmpty){
+                _girisYap(context);
+              }else{
+                _sifreyiKaydet(context);
+              }
+            },
+          ),
         ],
       ),
     );
   }
 
-  void _sifreyiKaydet() async{
+  void _sifreyiKaydet(BuildContext context) async {
     String girilenSifre = _sifreController.text;
 
-    if(girilenSifre.isNotEmpty){
-      SharedPreferences pref = await SharedPreferences.getInstance(); // SharedPreferences sınıfının varsayılan ilk nesnesini çağırdık
-      await pref.setString("sifre", girilenSifre); // pref nesnesi aracılığı ile setString fonksiyonunu çağırıyoruz(ilk parametre "key" ikinci parametre "value")
+    if (girilenSifre.isNotEmpty) {
+      SharedPreferences prefs = await SharedPreferences
+          .getInstance(); // SharedPreferences sınıfının varsayılan ilk nesnesini çağırdık
+      await prefs.setString("sifre",
+          girilenSifre); // pref nesnesi aracılığı ile setString fonksiyonunu çağırıyoruz(ilk parametre "key" ikinci parametre "value")
+      _kitaplarSayfasiniAc(context);
     }
+  }
+
+  void _sifreyiGetir() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String okunanDeger = await prefs.getString("sifre") ?? "";
+    setState(() {
+      _mevcutSifre = okunanDeger;
+    });
+  }
+
+  void _girisYap(BuildContext context) {
+    if (_sifreController.text == _mevcutSifre) {
+      _kitaplarSayfasiniAc(context);
+    }
+  }
+
+  void _kitaplarSayfasiniAc(BuildContext context) {
+    MaterialPageRoute sayfaYolu = MaterialPageRoute(
+      builder: (BuildContext context) {
+        return KitaplarSayfasi();
+      },
+    );
+    Navigator.pushReplacement(context, sayfaYolu);
   }
 }
