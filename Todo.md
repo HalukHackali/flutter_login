@@ -42,6 +42,7 @@ nesne oluşturulacaktır ve her yerde oluşturulan bu tek nesne kullanılacaktı
 
 ÖR:
 
+````
 class YerelVeriTabani {
     YerelVeriTabani._privateConstructor();
     static final YerelVeriTabani _nesne = YerelVeriTabani._privateConstructor();
@@ -49,7 +50,7 @@ class YerelVeriTabani {
         return _nesne;
     }
 }
-
+````
 **NOT:** Factory constructor nesne oluşturmaz, başka bir constructr tarafından oluşturulan nesneyi 
 düzenleyip döndürmemizi sağlar.
 
