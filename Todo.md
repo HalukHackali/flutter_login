@@ -1,11 +1,11 @@
 # DATEBASE TABLE KISALTMALARININ ANLAMLARI
 
-- NN(Not Null): Alan null olamaz. Ör. ID - İsim - Ad vs 
-- PK(Primary Key): Birincil(asıl) alan. Satırları birbirinden ayıran asıl değer. Ör. ID
-- AI(Auto Increment): Otomatik artsın. Ör. ID değeri otomatik artsın.
-- U(Uniqe): Benzersiz olsun. Ör. ID - İsim benzersiz olsun.
+- **NN(Not Null):** Alan null olamaz. Ör. ID - İsim - Ad vs 
+- **PK(Primary Key):** Birincil(asıl) alan. Satırları birbirinden ayıran asıl değer. Ör. ID
+- **AI(Auto Increment):** Otomatik artsın. Ör. ID değeri otomatik artsın.
+- **U(Uniqe):** Benzersiz olsun. Ör. ID - İsim benzersiz olsun.
 
-ÖRNEK DB TABLOSU
+### Örnek DB Tablosu
 
 ----
 ````
