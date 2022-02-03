@@ -8,7 +8,7 @@
 ÖRNEK DB TABLOSU
 
 ----
-
+````
 CREATE TABLE "kitaplar" (
     "id"    INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT,
     "isim"  TEXT NOT NULL,
@@ -16,9 +16,9 @@ CREATE TABLE "kitaplar" (
     "sayfaSayisi"   INTEGER,
     "ilkBasimYili"  INTEGER
 );
-
+````
 ---- YADA ----
-
+````
 CREATE TABLE "kitaplar" (
     "id"    INTEGER NOT NULL UNIQUE,
     "isim"  TEXT NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE "kitaplar" (
     "ilkBasimYili"  INTEGER,
     PRIMARY KEY("id" AUTOINCREMENT)
 );
-
+````
 -----
 
 # SINGLETON
@@ -45,7 +45,9 @@ nesne oluşturulacaktır ve her yerde oluşturulan bu tek nesne kullanılacaktı
 ````
 class YerelVeriTabani {
     YerelVeriTabani._privateConstructor();
+    
     static final YerelVeriTabani _nesne = YerelVeriTabani._privateConstructor();
+    
     factory YerelVeriTabani() {
         return _nesne;
     }
