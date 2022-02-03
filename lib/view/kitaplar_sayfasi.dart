@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login/view/model/kiap.dart';
+import 'package:flutter_login/model/kiap.dart';
 
 class KitaplarSayfasi extends StatelessWidget {
   const KitaplarSayfasi({Key? key}) : super(key: key);
