@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/model/kiap.dart';
+import 'package:flutter_login/veri_tabani/yerel_veri_tabani.dart';
 
 class KitaplarSayfasi extends StatelessWidget {
-  const KitaplarSayfasi({Key? key}) : super(key: key);
+   KitaplarSayfasi({Key? key}) : super(key: key);
+
+  final YerelVeriTabani _yerelVeriTabani = YerelVeriTabani();
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +28,8 @@ class KitaplarSayfasi extends StatelessWidget {
     String kitapAdi = await _pencereAc(context, "Kitap Adı Giriniz") ?? " ";
     if(kitapAdi.isNotEmpty){
       Kitap yeniKitap = Kitap(kitapAdi, DateTime.now());
+      int kitapIdsi = await _yerelVeriTabani.createKitap(yeniKitap);
+      debugPrint("Kitap Idsi: " + kitapIdsi.toString());
     }
   }
 
